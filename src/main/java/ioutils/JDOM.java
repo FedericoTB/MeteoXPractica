@@ -14,18 +14,39 @@ import java.util.stream.Stream;
 
 public class JDOM {
     public Document document;
-    private final String URI;
+    private final String INPUT_URI;
     private final String ROOT_ELEMENT_NAME;
+    private final String OUTPUT_URI;
     private List<String> headers_list;
 
-    public JDOM (String uri, String rootElementName) {
-        this.URI = uri;
+    public JDOM (String output_uri, String rootElementName, String input_uri) {
+        this.INPUT_URI = input_uri;
         this.ROOT_ELEMENT_NAME = rootElementName;
+        this.OUTPUT_URI = output_uri;
     }
     public void generateDocument() {
         initDocument();
         try {
-            Stream<String> dataStream = Files.lines(Path.of(this.URI));
+            fillDocumentDataFromCSV();
+            writeFileFromDocument();
+        } catch(IOException ex) {
+            System.err.println("XML File could not be written from csv");
+        }
+    }
+
+    public XMLOutputter getPrettyOutputter () {
+        XMLOutputter xmlOutput = new XMLOutputter();
+        xmlOutput.setFormat(Format.getPrettyFormat());
+        return xmlOutput;
+    }
+
+    public void writeFileFromDocument() throws IOException {
+        XMLOutputter xmlOutput = this.getPrettyOutputter();
+        xmlOutput.output(this.document, Files.newBufferedWriter(Path.of(this.OUTPUT_URI)));
+    }
+
+    public void fillDocumentDataFromCSV() throws IOException {
+            Stream<String> dataStream = Files.lines(Path.of(this.INPUT_URI));
             dataStream.forEach(s -> {
                 if (s.charAt(0) >= '0' && s.charAt(0) <= '9') {
                     addLineElement(s);
@@ -33,11 +54,7 @@ public class JDOM {
                     headers_list = Arrays.asList(s.split(";"));
                 }
             });
-        } catch (IOException e) {
-            System.err.println("Archivo csv no puedo ser leido.");
-        }
     }
-
     public void addLineElement(String line) {
         Element measure = new Element("measure");
         Element root = document.getRootElement();
@@ -53,10 +70,7 @@ public class JDOM {
     }
 
     public static void main (String[] args) throws IOException {
-        JDOM jdom = new JDOM("data//calidad_aire_datos_mes.csv", "temperatura");
+        JDOM jdom = new JDOM("data//calidad_aire_datos_mes.xml", "temperatura", "data//calidad_aire_datos_mes.csv");
         jdom.generateDocument();
-        XMLOutputter xmlOutput = new XMLOutputter();
-        xmlOutput.setFormat(Format.getPrettyFormat());
-        xmlOutput.output(jdom.document, System.out);
     }
 }
