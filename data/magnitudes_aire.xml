@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<magnitudes>
+  <measure>
+    <codigo_magnitud>1</codigo_magnitud>
+    <descripcion_magnitud>Dióxido de azufre</descripcion_magnitud>
+    <codigo_tecnica_medida>38</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Fluorescencia ultravioleta</descripcion_tecnica_medida>
+    <unidad>µg/m³</unidad>
+    <descripcion_unidad>microgramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>6</codigo_magnitud>
+    <descripcion_magnitud>Monóxido de carbono</descripcion_magnitud>
+    <codigo_tecnica_medida>48</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Espectrometría infrarroja no dispersiva</descripcion_tecnica_medida>
+    <unidad>mg/m³</unidad>
+    <descripcion_unidad>miligramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>7</codigo_magnitud>
+    <descripcion_magnitud>Monóxido de nitrógeno</descripcion_magnitud>
+    <codigo_tecnica_medida>8</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Quimioluminiscencia</descripcion_tecnica_medida>
+    <unidad>µg/m³</unidad>
+    <descripcion_unidad>microgramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>8</codigo_magnitud>
+    <descripcion_magnitud>Dióxido de nitrógeno</descripcion_magnitud>
+    <codigo_tecnica_medida>8</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Quimioluminiscencia</descripcion_tecnica_medida>
+    <unidad>µg/m³</unidad>
+    <descripcion_unidad>microgramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>9</codigo_magnitud>
+    <descripcion_magnitud>Partículas en suspensión menor que PM2,5</descripcion_magnitud>
+    <codigo_tecnica_medida>49</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Absorción beta</descripcion_tecnica_medida>
+    <unidad>µg/m³</unidad>
+    <descripcion_unidad>microgramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>10</codigo_magnitud>
+    <descripcion_magnitud>Partículas en suspensión menor que PM10 49</descripcion_magnitud>
+    <codigo_tecnica_medida>Absorción beta</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>µg/m³</descripcion_tecnica_medida>
+    <unidad>microgramos por metro cúbico</unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>12</codigo_magnitud>
+    <descripcion_magnitud>Óxidos de nitrógeno</descripcion_magnitud>
+    <codigo_tecnica_medida>8</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Quimioluminiscencia</descripcion_tecnica_medida>
+    <unidad>µg/m³</unidad>
+    <descripcion_unidad>microgramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>14</codigo_magnitud>
+    <descripcion_magnitud>Ozono</descripcion_magnitud>
+    <codigo_tecnica_medida>6</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Absorción ultravioleta</descripcion_tecnica_medida>
+    <unidad>µg/m³</unidad>
+    <descripcion_unidad>microgramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>20</codigo_magnitud>
+    <descripcion_magnitud>Tolueno</descripcion_magnitud>
+    <codigo_tecnica_medida>59</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Cromatografía de gases</descripcion_tecnica_medida>
+    <unidad>µg/m³</unidad>
+    <descripcion_unidad>microgramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>22</codigo_magnitud>
+    <descripcion_magnitud>Black Carbon</descripcion_magnitud>
+    <codigo_tecnica_medida>7</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Absorción de luz</descripcion_tecnica_medida>
+    <unidad>µg/m³</unidad>
+    <descripcion_unidad>microgramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>30</codigo_magnitud>
+    <descripcion_magnitud>Benceno</descripcion_magnitud>
+    <codigo_tecnica_medida>59</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Cromatografía de gases</descripcion_tecnica_medida>
+    <unidad>µg/m³</unidad>
+    <descripcion_unidad>microgramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>42</codigo_magnitud>
+    <descripcion_magnitud>Hidrocarburos totales</descripcion_magnitud>
+    <codigo_tecnica_medida>2</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Ionización llama</descripcion_tecnica_medida>
+    <unidad>mg/m³</unidad>
+    <descripcion_unidad>miligramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>44</codigo_magnitud>
+    <descripcion_magnitud>Hidrocarburos no metánicos</descripcion_magnitud>
+    <codigo_tecnica_medida>2</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Ionización llama</descripcion_tecnica_medida>
+    <unidad>mg/m³</unidad>
+    <descripcion_unidad>miligramos por metro cúbico</descripcion_unidad>
+  </measure>
+  <measure>
+    <codigo_magnitud>431</codigo_magnitud>
+    <descripcion_magnitud>MetaParaXileno</descripcion_magnitud>
+    <codigo_tecnica_medida>59</codigo_tecnica_medida>
+    <descripcion_tecnica_medida>Cromatografía de gases</descripcion_tecnica_medida>
+    <unidad>µg/m³</unidad>
+    <descripcion_unidad>microgramos por metro cúbico</descripcion_unidad>
+  </measure>
+</magnitudes>

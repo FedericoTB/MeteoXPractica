@@ -2,75 +2,61 @@ package ioutils;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import pojos.Measure;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
-public class JDOM {
-    public Document document;
-    private final String INPUT_URI;
-    private final String ROOT_ELEMENT_NAME;
-    private final String OUTPUT_URI;
-    private List<String> headers_list;
+public class JDOM{
+    private Document document;
+    private final String URI;
+    private List<Measure> measureList;
 
-    public JDOM (String output_uri, String rootElementName, String input_uri) {
-        this.INPUT_URI = input_uri;
-        this.ROOT_ELEMENT_NAME = rootElementName;
-        this.OUTPUT_URI = output_uri;
+    public JDOM (String uri) {
+        this.URI = uri;
     }
-    public void generateDocument() {
+
+    public void loadData() throws IOException, JDOMException {
         initDocument();
-        try {
-            fillDocumentDataFromCSV();
-            writeFileFromDocument();
-        } catch(IOException ex) {
-            System.err.println("XML File could not be written from csv");
-        }
+        fillDocumentDataFromXML();
     }
 
-    public XMLOutputter getPrettyOutputter () {
+    private void fillDocumentDataFromXML() throws IOException, JDOMException {
+        SAXBuilder saxBuilder = new SAXBuilder();
+        this.document = saxBuilder.build(this.URI);
+    }
+
+    private XMLOutputter getPrettyOutputter () {
         XMLOutputter xmlOutput = new XMLOutputter();
-        xmlOutput.setFormat(Format.getPrettyFormat());
+        xmlOutput.setFormat(Format.getPrettyFormat().setEncoding("windows-1252"));
         return xmlOutput;
     }
 
-    public void writeFileFromDocument() throws IOException {
+    public void writeXMLFile(String outputUri) throws IOException {
         XMLOutputter xmlOutput = this.getPrettyOutputter();
-        xmlOutput.output(this.document, Files.newBufferedWriter(Path.of(this.OUTPUT_URI)));
+        xmlOutput.output(this.document, Files.newBufferedWriter(Path.of(outputUri), Charset.forName("windows-1252")));
     }
 
-    public void fillDocumentDataFromCSV() throws IOException {
-            Stream<String> dataStream = Files.lines(Path.of(this.INPUT_URI));
-            dataStream.forEach(s -> {
-                if (s.charAt(0) >= '0' && s.charAt(0) <= '9') {
-                    addLineElement(s);
-                }else{
-                    headers_list = Arrays.asList(s.split(";"));
-                }
-            });
+    public void printXMLFile() throws IOException {
+        XMLOutputter xmlOutput = this.getPrettyOutputter();
+        xmlOutput.output(this.document, System.out);
     }
-    public void addLineElement(String line) {
-        Element measure = new Element("measure");
-        Element root = document.getRootElement();
-        List<String> splitted = Arrays.asList(line.split(";"));
-        for(int i = 0; i < splitted.size(); i++)
-            measure.addContent(new Element(headers_list.get(i)).setText(splitted.get(i)));
-        root.addContent(measure);
-    }
-
     public void initDocument() {
         this.document = new Document();
-        this.document.setRootElement(new Element(ROOT_ELEMENT_NAME));
+        this.document.setProperty("Charset", "windows-1252");
     }
 
-    public static void main (String[] args) throws IOException {
-        JDOM jdom = new JDOM("data//calidad_aire_datos_mes.xml", "temperatura", "data//calidad_aire_datos_mes.csv");
-        jdom.generateDocument();
+    public Document getDocument() {
+        return document;
     }
 }
