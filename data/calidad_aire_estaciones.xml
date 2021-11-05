@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1252"?>
 <estaciones>
-  <measure>
+  <estacion>
     <estacion_codigo>28005002</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 2 Corredor del Henares</zona_calidad_aire_descripcion>
     <estacion_municipio>Alcalá de Henares</estacion_municipio>
@@ -24,8 +24,8 @@
     <estacion_analizador_XIL />
     <estacion_analizador_CO>Si</estacion_analizador_CO>
     <estacion_analizador_SO2>Si</estacion_analizador_SO2>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28006004</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 2 Corredor del Henares</zona_calidad_aire_descripcion>
     <estacion_municipio>Alcobendas</estacion_municipio>
@@ -51,8 +51,8 @@
     <estacion_analizador_SO2 />
     <estacion_analizador_HCT>Si</estacion_analizador_HCT>
     <estacion_analizador_HNM>Si</estacion_analizador_HNM>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28007004</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 3 Urbana Sur</zona_calidad_aire_descripcion>
     <estacion_municipio>Alcorcón</estacion_municipio>
@@ -71,8 +71,8 @@
     <estacion_analizador_PM10 />
     <estacion_analizador_PM2_5>Si</estacion_analizador_PM2_5>
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28009001</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 2 Corredor del Henares</zona_calidad_aire_descripcion>
     <estacion_municipio>Algete</estacion_municipio>
@@ -91,8 +91,8 @@
     <estacion_analizador_PM10>Si</estacion_analizador_PM10>
     <estacion_analizador_PM2_5 />
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28013002</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 3 Urbana Sur</zona_calidad_aire_descripcion>
     <estacion_municipio>Aranjuez</estacion_municipio>
@@ -111,8 +111,8 @@
     <estacion_analizador_PM10>Si</estacion_analizador_PM10>
     <estacion_analizador_PM2_5>Si</estacion_analizador_PM2_5>
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28014002</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 2 Corredor del Henares</zona_calidad_aire_descripcion>
     <estacion_municipio>Arganda del Rey</estacion_municipio>
@@ -131,8 +131,8 @@
     <estacion_analizador_PM10>Si</estacion_analizador_PM10>
     <estacion_analizador_PM2_5 />
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28016001</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 5 Sierra Norte</zona_calidad_aire_descripcion>
     <estacion_municipio>El Atazar</estacion_municipio>
@@ -151,8 +151,8 @@
     <estacion_analizador_PM10>Si</estacion_analizador_PM10>
     <estacion_analizador_PM2_5>Si</estacion_analizador_PM2_5>
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28045002</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 4 Urbana Noroeste</zona_calidad_aire_descripcion>
     <estacion_municipio>Colmenar Viejo</estacion_municipio>
@@ -171,8 +171,8 @@
     <estacion_analizador_PM10 />
     <estacion_analizador_PM2_5>Si</estacion_analizador_PM2_5>
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28047002</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 4 Urbana Noroeste</zona_calidad_aire_descripcion>
     <estacion_municipio>Collado Villalba</estacion_municipio>
@@ -191,8 +191,8 @@
     <estacion_analizador_PM10>Si</estacion_analizador_PM10>
     <estacion_analizador_PM2_5 />
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28049003</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 2 Corredor del Henares</zona_calidad_aire_descripcion>
     <estacion_municipio>Coslada</estacion_municipio>
@@ -218,8 +218,8 @@
     <estacion_analizador_SO2 />
     <estacion_analizador_HCT>Si</estacion_analizador_HCT>
     <estacion_analizador_HNM>Si</estacion_analizador_HNM>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28058004</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 3 Urbana Sur</zona_calidad_aire_descripcion>
     <estacion_municipio>Fuenlabrada</estacion_municipio>
@@ -238,8 +238,8 @@
     <estacion_analizador_PM10>Si</estacion_analizador_PM10>
     <estacion_analizador_PM2_5>Si</estacion_analizador_PM2_5>
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28065014</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 3 Urbana Sur</zona_calidad_aire_descripcion>
     <estacion_municipio>Getafe</estacion_municipio>
@@ -258,8 +258,8 @@
     <estacion_analizador_PM10>Si</estacion_analizador_PM10>
     <estacion_analizador_PM2_5>Si</estacion_analizador_PM2_5>
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28067001</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 5 Sierra Norte</zona_calidad_aire_descripcion>
     <estacion_municipio>Guadalix de la Sierra</estacion_municipio>
@@ -283,8 +283,8 @@
     <estacion_analizador_XIL />
     <estacion_analizador_CO>Si</estacion_analizador_CO>
     <estacion_analizador_SO2>Si</estacion_analizador_SO2>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28074007</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 3 Urbana Sur</zona_calidad_aire_descripcion>
     <estacion_municipio>Leganés</estacion_municipio>
@@ -303,8 +303,8 @@
     <estacion_analizador_PM10 />
     <estacion_analizador_PM2_5>Si</estacion_analizador_PM2_5>
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28080003</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 4 Urbana Noroeste</zona_calidad_aire_descripcion>
     <estacion_municipio>Majadahonda</estacion_municipio>
@@ -327,8 +327,8 @@
     <estacion_analizador_BEN />
     <estacion_analizador_XIL />
     <estacion_analizador_CO>Si</estacion_analizador_CO>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28092005</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 3 Urbana Sur</zona_calidad_aire_descripcion>
     <estacion_municipio>Móstoles</estacion_municipio>
@@ -354,8 +354,8 @@
     <estacion_analizador_SO2>Si</estacion_analizador_SO2>
     <estacion_analizador_HCT>Si</estacion_analizador_HCT>
     <estacion_analizador_HNM>Si</estacion_analizador_HNM>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28102001</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 7 Cuenca del Tajuña</zona_calidad_aire_descripcion>
     <estacion_municipio>Orusco de Tajuña</estacion_municipio>
@@ -374,8 +374,8 @@
     <estacion_analizador_PM10>Si</estacion_analizador_PM10>
     <estacion_analizador_PM2_5 />
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28120001</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 5 Sierra Norte</zona_calidad_aire_descripcion>
     <estacion_municipio>Rascafría (Puerto de Cotos)</estacion_municipio>
@@ -401,8 +401,8 @@
     <estacion_analizador_SO2>Si</estacion_analizador_SO2>
     <estacion_analizador_HCT>Si</estacion_analizador_HCT>
     <estacion_analizador_HNM>Si</estacion_analizador_HNM>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28123002</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 2 Corredor del Henares</zona_calidad_aire_descripcion>
     <estacion_municipio>Rivas-Vaciamadrid</estacion_municipio>
@@ -421,8 +421,8 @@
     <estacion_analizador_PM10>Si</estacion_analizador_PM10>
     <estacion_analizador_PM2_5 />
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28133002</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 6 Cuenca del Alberche</zona_calidad_aire_descripcion>
     <estacion_municipio>San Martín de Valdeiglesias</estacion_municipio>
@@ -441,8 +441,8 @@
     <estacion_analizador_PM10>Si</estacion_analizador_PM10>
     <estacion_analizador_PM2_5>Si</estacion_analizador_PM2_5>
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28148004</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 2 Corredor del Henares</zona_calidad_aire_descripcion>
     <estacion_municipio>Torrejón de Ardoz</estacion_municipio>
@@ -461,8 +461,8 @@
     <estacion_analizador_PM10>Si</estacion_analizador_PM10>
     <estacion_analizador_PM2_5 />
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28161001</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 3 Urbana Sur</zona_calidad_aire_descripcion>
     <estacion_municipio>Valdemoro</estacion_municipio>
@@ -486,8 +486,8 @@
     <estacion_analizador_XIL />
     <estacion_analizador_CO>Si</estacion_analizador_CO>
     <estacion_analizador_SO2>Si</estacion_analizador_SO2>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28171001</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 6 Cuenca del Alberche</zona_calidad_aire_descripcion>
     <estacion_municipio>Villa del Prado</estacion_municipio>
@@ -511,8 +511,8 @@
     <estacion_analizador_XIL />
     <estacion_analizador_CO>Si</estacion_analizador_CO>
     <estacion_analizador_SO2>Si</estacion_analizador_SO2>
-  </measure>
-  <measure>
+  </estacion>
+  <estacion>
     <estacion_codigo>28180001</estacion_codigo>
     <zona_calidad_aire_descripcion>Zona 7 Cuenca del Tajuña</zona_calidad_aire_descripcion>
     <estacion_municipio>Villarejo de Salvanés</estacion_municipio>
@@ -531,5 +531,5 @@
     <estacion_analizador_PM10 />
     <estacion_analizador_PM2_5>Si</estacion_analizador_PM2_5>
     <estacion_analizador_O3>Si</estacion_analizador_O3>
-  </measure>
+  </estacion>
 </estaciones>
