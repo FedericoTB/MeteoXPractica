@@ -2,10 +2,11 @@ package pojos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-
+@NoArgsConstructor
 /**
  * Class that models a measurement.
  * @author sps169, FedericoTB
