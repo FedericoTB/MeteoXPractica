@@ -3,6 +3,7 @@ package pojos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -17,18 +18,22 @@ import java.util.stream.Collectors;
  * Class that models a day worth of data.
  * @author sps169, FedericoTB
  */
+@XmlRootElement(name ="measure")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Measure {
 
     /**
      * Stores only the String value of a {@link Magnitude}
      * which means magnitude ==  Magnitude.getCodMagnitude().
      */
+    @XmlTransient
     private String magnitude;
     private LocalDate day;
 
     /**
      * List of {@link HourMeasurement} of a day. Should never have more than 24 elements.
      */
+    @XmlElementWrapper(name = "day_measurements")
     private List<HourMeasurement> dayMeasurements;
 
     /**

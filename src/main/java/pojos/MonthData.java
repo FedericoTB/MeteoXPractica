@@ -2,6 +2,7 @@ package pojos;
 
 import lombok.Data;
 
+import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +12,10 @@ import java.util.stream.Collectors;
  * Class that models the data of a whole month.
  * @author sps169, FedericoTB
  */
+@XmlRootElement(name = "monthdata")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MonthData {
+    @XmlElementWrapper(name ="measures")
     private List<Measure> measures;
     private Magnitude type;
     private Moment maxMeasure;
