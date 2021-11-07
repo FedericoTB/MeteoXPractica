@@ -10,6 +10,7 @@ import pojos.Measure;
 import pojos.MonthData;
 import pojos.Station;
 
+import javax.xml.bind.annotation.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -25,18 +26,30 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Class that models all the data obtained in order to generate the output
  * @author sps169, FedericoTB
  */
+@XmlRootElement(name = "inform")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder={"id", "station" , "timeOfAnalysis", "meteorologyData","contaminationData"})
 public class Analytics {
-    private final List<MonthData> contaminationData;
-    private final List<MonthData> meteorologyData;
-    private List<String> contentHtml;
+    private UUID id;
     private final Station station;
-    private final Path uri;
+
+    @XmlElementWrapper(name = "contamination")
+    private final List<MonthData> contaminationData;
+
+    @XmlElementWrapper(name = "meteorology")
+    private final List<MonthData> meteorologyData;
+
     private final long initialTime;
+    private final String timeOfAnalysis;
+
+    private final Path uri;
+    private List<String> contentHtml;
 
     /**
      * Constructor Method that initialize the variables and call the method generatedChart for each MonthData to generate
@@ -49,12 +62,14 @@ public class Analytics {
      * @throws IOException when the method write of {@link File} fails to write
      */
     public Analytics (List<MonthData> contaminationData, List<MonthData> meteorologyData, Station station, Path uri, long initialTime) throws IOException {
+        this.id = UUID.randomUUID();
         this.contaminationData =contaminationData;
         this.meteorologyData = meteorologyData;
         this.contentHtml = new ArrayList<>();
         this.station = station;
         this.uri = uri;
         this.initialTime = initialTime;
+        this.timeOfAnalysis = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/uuuu"));
         generateChart(this.meteorologyData);
         generateChart(this.contaminationData);
     }

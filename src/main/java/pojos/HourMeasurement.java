@@ -3,6 +3,10 @@ package pojos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 @Data
 @AllArgsConstructor
 
@@ -10,6 +14,8 @@ import lombok.Data;
  * Class that models a measurement.
  * @author sps169, FedericoTB
  */
+@XmlRootElement(name ="hour_measurement")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class HourMeasurement {
 
     /**
