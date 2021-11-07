@@ -5,6 +5,7 @@ import pojos.Measure;
 import pojos.Station;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -22,6 +23,7 @@ public class RunnableXMLMeasuresReader extends RunnableXMLReader{
      */
     public RunnableXMLMeasuresReader(String file, Station station) {
         super(file);
+        this.list = new ArrayList<Measure>();
         this.station = station;
     }
     @Override

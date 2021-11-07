@@ -5,6 +5,7 @@ import pojos.Magnitude;
 import pojos.Measure;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RunnableXMLMagnitudesReader extends RunnableXMLReader{
@@ -19,6 +20,7 @@ public class RunnableXMLMagnitudesReader extends RunnableXMLReader{
     }
     @Override
     public void run() {
+        this.list = new ArrayList<Magnitude>();
         try {
             this.list =  DataReading.getMagnitudes(super.getFile());
         } catch (IOException e) {

@@ -129,8 +129,8 @@ public class DataReading {
      */
     public static Stream<Element> getMeasuresDataOfStation(Station station, String file) throws IOException, JDOMException {
         JDOM data = getFile(file);
-        return data.getDocument().getRootElement().getChildren("medicion")
-                .stream().filter(m->m.getChildText("punto_muestro").contains(station.getStationCode()));
+        return  data.getDocument().getRootElement().getChildren("medicion")
+                .stream().filter(m->m.getChildText("punto_muestreo").contains(station.getStationCode()));
     }
 
     /**
@@ -145,20 +145,25 @@ public class DataReading {
            for (int i = 1; i<= 24;i++){
                HourMeasurement hourM = new HourMeasurement();
                hourM.setHour(i);
+
                if(i<10){
-                    hourM.setValue(Float.valueOf(e.getChildText("h0"+i)));
+                   if(e.getChildText("v0"+i).equals("V")){
+                       String value = e.getChildText("h0"+i).replace(",",".");
+                       hourM.setValue(Float.valueOf(value));}
                    hourM.setValidation(e.getChildText("v0"+i).charAt(0));
                }else {
-                   hourM.setValue(Float.valueOf(e.getChildText("h"+i)));
+                   if(e.getChildText("v"+i).equals("V")){
+                       String value = e.getChildText("h"+i).replace(",",".");
+                   hourM.setValue(Float.valueOf(value));}
                    hourM.setValidation(e.getChildText("v"+i).charAt(0));
                }
                 listHours.add(hourM);
            }
          return new Measure(
                   e.getChildText("magnitud"),
-                  LocalDate.of(Integer.getInteger(e.getChildText("dia")),
-                          Integer.getInteger(e.getChildText("mes")),
-                          Integer.getInteger(e.getChildText("ano"))
+                  LocalDate.of(Integer.parseInt(e.getChildText("ano")),
+                          Integer.parseInt(e.getChildText("mes")),
+                          Integer.parseInt(e.getChildText("dia"))
                   ),listHours);
        }).collect(Collectors.toList());
     }
@@ -168,6 +173,5 @@ public class DataReading {
         return magnitudesXml.stream().map(b-> new Magnitude( b.getChildText("codigo_magnitud"),
                 b.getChildText("descripcion_magnitud"),
                 b.getChildText("unidad"))).collect(Collectors.toList());
-
     }
 }
