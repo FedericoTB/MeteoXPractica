@@ -2,6 +2,7 @@ package pojos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
@@ -13,12 +14,13 @@ import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
-
+@NoArgsConstructor
 /**
  * Class that models a day worth of data.
  * @author sps169, FedericoTB
  */
 @XmlRootElement(name ="measure")
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Measure {
 

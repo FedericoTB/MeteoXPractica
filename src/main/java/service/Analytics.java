@@ -1,5 +1,6 @@
 package service;
 
+import lombok.NoArgsConstructor;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
@@ -27,28 +28,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
+@NoArgsConstructor
 /**
  * Class that models all the data obtained in order to generate the output
  * @author sps169, FedericoTB
  */
 @XmlRootElement(name = "inform")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder={"id", "station" , "timeOfAnalysis", "meteorologyData","contaminationData"})
 public class Analytics {
+    @XmlAttribute
     private UUID id;
-    private final Station station;
+    private Station station;
 
     @XmlElementWrapper(name = "contamination")
-    private final List<MonthData> contaminationData;
+    private List<MonthData> contaminationData;
 
     @XmlElementWrapper(name = "meteorology")
-    private final List<MonthData> meteorologyData;
+    private List<MonthData> meteorologyData;
 
-    private final long initialTime;
-    private final String timeOfAnalysis;
+    private String timeOfAnalysis;
 
-    private final Path uri;
+    @XmlTransient
+    private long initialTime;
+
+    @XmlTransient
+    private Path uri;
+    @XmlTransient
     private List<String> contentHtml;
 
     /**

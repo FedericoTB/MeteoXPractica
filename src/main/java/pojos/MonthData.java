@@ -1,6 +1,7 @@
 package pojos;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
 /**
  * Class that models the data of a whole month.
  * @author sps169, FedericoTB

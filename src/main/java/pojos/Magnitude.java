@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 /**
  * Class that models a magnitude
  * @author sps169, FedericoTB

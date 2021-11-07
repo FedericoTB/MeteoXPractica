@@ -7,6 +7,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class JAXBController {
     private static JAXBController instance;
@@ -34,11 +38,13 @@ public class JAXBController {
         convertObjectToXML(analytics);
     }
 
-    public void writeXMLFile(String uri) throws JAXBException {
-        this.marshaller.marshal(analytics, new File(uri));
+    public void writeXMLFile(String uri) throws JAXBException, IOException {
+        if(!Files.exists(Path.of(uri + File.separator + "db"))){Files.createDirectory(Path.of(uri+File.separator+"db"));}
+        this.marshaller.setProperty(Marshaller.JAXB_ENCODING, "windows-1252");
+        this.marshaller.marshal(analytics, new File(uri+File.separator+"db"+File.separator+"mediciones.xml"));
     }
 
-    public void printXML(String uri) throws JAXBException {
+    public void printXML() throws JAXBException {
         this.marshaller.marshal(analytics, System.out);
     }
     private Analytics convertXMLToObject(String uri) throws JAXBException {
