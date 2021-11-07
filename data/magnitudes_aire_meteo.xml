@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="windows-1252"?>
 <magnitudes>
-  <measure>
+  <magnitud>
     <codigo_magnitud>81</codigo_magnitud>
     <descripcion_magnitud>Velocidad del viento</descripcion_magnitud>
     <codigo_tecnica_medida>89</codigo_tecnica_medida>
     <descripcion_tecnica_medida />
     <unidad>m/s</unidad>
     <descripcion_unidad>metros por segundo</descripcion_unidad>
-  </measure>
-  <measure>
+  </magnitud>
+  <magnitud>
     <codigo_magnitud>83</codigo_magnitud>
     <descripcion_magnitud>Temperatura</descripcion_magnitud>
     <codigo_tecnica_medida>89</codigo_tecnica_medida>
     <descripcion_tecnica_medida />
     <unidad>ºc</unidad>
     <descripcion_unidad>grados centígrados</descripcion_unidad>
-  </measure>
-  <measure>
+  </magnitud>
+  <magnitud>
     <codigo_magnitud>86</codigo_magnitud>
     <descripcion_magnitud>Humedad relativa</descripcion_magnitud>
     <codigo_tecnica_medida>89</codigo_tecnica_medida>
     <descripcion_tecnica_medida />
     <unidad>%</unidad>
     <descripcion_unidad>porcentaje</descripcion_unidad>
-  </measure>
-  <measure>
+  </magnitud>
+  <magnitud>
     <codigo_magnitud>88</codigo_magnitud>
     <descripcion_magnitud>Radiación solar</descripcion_magnitud>
     <codigo_tecnica_medida>89</codigo_tecnica_medida>
     <descripcion_tecnica_medida />
     <unidad>W/m2</unidad>
     <descripcion_unidad>vatios por metro cuadrado</descripcion_unidad>
-  </measure>
-  <measure>
+  </magnitud>
+  <magnitud>
     <codigo_magnitud>89</codigo_magnitud>
     <descripcion_magnitud>Precipitación</descripcion_magnitud>
     <codigo_tecnica_medida>89</codigo_tecnica_medida>
     <descripcion_tecnica_medida />
     <unidad>l/m2</unidad>
     <descripcion_unidad>litros por metro cuadrado</descripcion_unidad>
-  </measure>
+  </magnitud>
 </magnitudes>

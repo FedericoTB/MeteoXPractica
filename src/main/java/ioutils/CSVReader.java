@@ -15,12 +15,14 @@ public class CSVReader extends Thread {
 	private final String OUTPUT_URI;
 	private final String INPUT_URI;
 	private String rootElementName;
+	private String tagName;
 	private List<String> headersList;
 
-	public CSVReader (String rootElementName, String inputURI, String outputURI) {
+	public CSVReader (String rootElementName, String tagName, String inputURI, String outputURI) {
 		this.INPUT_URI = inputURI;
 		this.OUTPUT_URI = outputURI;
 		this.rootElementName = rootElementName;
+		this.tagName = tagName;
 	}
 
 	public void run() {
@@ -34,11 +36,11 @@ public class CSVReader extends Thread {
 		JDOM jdomController = new JDOM(this.INPUT_URI);
 		jdomController.initDocument();
 		jdomController.getDocument().setRootElement(new Element(this.rootElementName));
-		fillDocumentDataFromCSV(jdomController);
+		fillDocumentDataFromCSV(this.tagName, jdomController);
 		jdomController.writeXMLFile(this.OUTPUT_URI);
 	}
 
-	public void fillDocumentDataFromCSV(JDOM jdomController) throws IOException {
+	public void fillDocumentDataFromCSV(String tagName, JDOM jdomController) throws IOException {
 		Stream<String> dataStream = Files.lines(Path.of(this.INPUT_URI), Charset.forName("windows-1252"));
 		dataStream.forEach(s -> {
 			if (s.charAt(0) >= '0' && s.charAt(0) <= '9') {
@@ -49,7 +51,7 @@ public class CSVReader extends Thread {
 		});
 	}
 	public void addLineElement(String line, JDOM jdomController) {
-		Element measure = new Element("measure");
+		Element measure = new Element(this.tagName);
 		Element root = jdomController.getDocument().getRootElement();
 		List<String> splitted = Arrays.asList(line.split(";"));
 		for(int i = 0; i < splitted.size(); i++)
@@ -58,11 +60,11 @@ public class CSVReader extends Thread {
 	}
 
 	public static void generateXMLFilesFromCSV() throws IOException {
-		CSVReader csvPollution = new CSVReader( "contaminacion", "data//calidad_aire_datos_mes.csv", "data//calidad_aire_datos_mes.xml");
-		CSVReader csvTemperature = new CSVReader( "temperatura", "data//calidad_aire_datos_meteo_mes.csv", "data//calidad_aire_datos_meteo_mes.xml");
-		CSVReader csvStations = new CSVReader( "estaciones", "data/calidad_aire_estaciones.csv", "data/calidad_aire_estaciones.xml");
-		CSVReader csvMagnitudesPollution = new CSVReader( "magnitudes", "data/magnitudes_aire.csv", "data/magnitudes_aire.xml");
-		CSVReader csvMagnitudesTemperature = new CSVReader( "magnitudes", "data/magnitudes_aire_meteo.csv", "data/magnitudes_aire_meteo.xml");
+		CSVReader csvPollution = new CSVReader( "contaminacion", "medicion","data//calidad_aire_datos_mes.csv", "data//calidad_aire_datos_mes.xml");
+		CSVReader csvTemperature = new CSVReader( "temperatura", "medicion","data//calidad_aire_datos_meteo_mes.csv", "data//calidad_aire_datos_meteo_mes.xml");
+		CSVReader csvStations = new CSVReader( "estaciones", "estacion","data/calidad_aire_estaciones.csv", "data/calidad_aire_estaciones.xml");
+		CSVReader csvMagnitudesPollution = new CSVReader( "magnitudes", "magnitud","data/magnitudes_aire.csv", "data/magnitudes_aire.xml");
+		CSVReader csvMagnitudesTemperature = new CSVReader( "magnitudes", "magnitud","data/magnitudes_aire_meteo.csv", "data/magnitudes_aire_meteo.xml");
 		csvPollution.loadCSVData();
 		csvTemperature.loadCSVData();
 		csvStations.loadCSVData();
