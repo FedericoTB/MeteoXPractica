@@ -62,38 +62,14 @@ public class DataReading {
      */
     public static Path createDirectory(String uri) {
         Path directoryPath = null;
-        if (Files.exists(Path.of(uri))) {
-            Scanner scanner = new Scanner(System.in);
-            boolean correctAnswer = false;
-            while (!correctAnswer){
-                System.out.println("Would you like to erase the existing output directory? (yes/no)");
-                String answer = scanner.next();
-                if (answer.equalsIgnoreCase("yes")) {
-                    correctAnswer = true;
-                    try {
-                        if (Files.exists(Path.of(uri))){
-                            deleteDirectory(Path.of(uri));
-                        }
-                    }catch (IOException e) {
-                        System.err.println("Couldn't delete directory");
-                    }
-                    try {
-                        directoryPath = Files.createDirectory(Path.of(uri));
-                    }catch (IOException e) {
-                        System.err.println("Couldn't create output directory");
-                    }
-                } else if (answer.equalsIgnoreCase("no")) {
-                    correctAnswer = true;
-                    System.out.println("Nothing was generated");
-                }
-                scanner.nextLine();
-            }
-        }else{
+        if (!Files.exists(Path.of(uri))) {
             try {
                 directoryPath = Files.createDirectory(Path.of(uri));
             }catch (IOException e) {
                 System.err.println("Couldn't create output directory");
             }
+        }else {
+            directoryPath = Path.of(uri);
         }
         return directoryPath;
     }
@@ -150,12 +126,12 @@ public class DataReading {
                    if(e.getChildText("v0"+i).equals("V")){
                        String value = e.getChildText("h0"+i).replace(",",".");
                        hourM.setValue(Float.valueOf(value));}
-                   hourM.setValidation(e.getChildText("v0"+i).charAt(0));
+                   hourM.setValidation(e.getChildText("v0"+i));
                }else {
                    if(e.getChildText("v"+i).equals("V")){
                        String value = e.getChildText("h"+i).replace(",",".");
                    hourM.setValue(Float.valueOf(value));}
-                   hourM.setValidation(e.getChildText("v"+i).charAt(0));
+                   hourM.setValidation(e.getChildText("v"+i));
                }
                 listHours.add(hourM);
            }

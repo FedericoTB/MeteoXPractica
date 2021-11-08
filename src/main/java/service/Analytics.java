@@ -1,5 +1,6 @@
 package service;
 
+import lombok.NoArgsConstructor;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
@@ -10,11 +11,13 @@ import pojos.Measure;
 import pojos.MonthData;
 import pojos.Station;
 
+import javax.xml.bind.annotation.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,18 +28,34 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+import java.util.UUID;
+@NoArgsConstructor
 /**
  * Class that models all the data obtained in order to generate the output
  * @author sps169, FedericoTB
  */
+@XmlRootElement(name = "inform")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Analytics {
-    private final List<MonthData> contaminationData;
-    private final List<MonthData> meteorologyData;
+    @XmlAttribute
+    private UUID id;
+    private Station station;
+
+    @XmlElementWrapper(name = "contamination")
+    private List<MonthData> contaminationData;
+
+    @XmlElementWrapper(name = "meteorology")
+    private List<MonthData> meteorologyData;
+
+    private String timeOfAnalysis;
+
+    @XmlTransient
+    private long initialTime;
+
+    @XmlTransient
+    private Path uri;
+    @XmlTransient
     private List<String> contentHtml;
-    private final Station station;
-    private final Path uri;
-    private final long initialTime;
 
     /**
      * Constructor Method that initialize the variables and call the method generatedChart for each MonthData to generate
@@ -49,12 +68,14 @@ public class Analytics {
      * @throws IOException when the method write of {@link File} fails to write
      */
     public Analytics (List<MonthData> contaminationData, List<MonthData> meteorologyData, Station station, Path uri, long initialTime) throws IOException {
+        this.id = UUID.randomUUID();
         this.contaminationData =contaminationData;
         this.meteorologyData = meteorologyData;
         this.contentHtml = new ArrayList<>();
         this.station = station;
         this.uri = uri;
         this.initialTime = initialTime;
+        this.timeOfAnalysis = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/uuuu"));
         generateChart(this.meteorologyData);
         generateChart(this.contaminationData);
     }
@@ -196,5 +217,19 @@ public class Analytics {
     private String getEndingDate(){
        return this.meteorologyData.stream().filter(Objects::nonNull).map(MonthData::getEndDayMeasure).filter(Objects::nonNull)
                .max(LocalDate::compareTo).get().format(DateTimeFormatter.ofPattern("dd/MM/uuuu"));
+    }
+
+    @Override
+    public String toString() {
+        return "Analytics{" +
+                "id=" + id +
+                ", station=" + station +
+                ", contaminationData=" + contaminationData +
+                ", meteorologyData=" + meteorologyData +
+                ", timeOfAnalysis='" + timeOfAnalysis + '\'' +
+                ", initialTime=" + initialTime +
+                ", uri=" + uri +
+                ", contentHtml=" + contentHtml +
+                '}';
     }
 }
