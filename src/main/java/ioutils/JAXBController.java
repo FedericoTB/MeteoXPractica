@@ -32,6 +32,7 @@ public class JAXBController {
         JAXBContext context = JAXBContext.newInstance(Analytics.class);
         this.marshaller = context.createMarshaller();
         this.marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
+        this.marshaller.setProperty(Marshaller.JAXB_ENCODING, "windows-1252");
     }
 
     public void setAnalytics(Analytics analytics) throws JAXBException {
@@ -40,7 +41,6 @@ public class JAXBController {
 
     public void writeXMLFile(String uri) throws JAXBException, IOException {
         if(!Files.exists(Path.of(uri + File.separator + "db"))){Files.createDirectory(Path.of(uri+File.separator+"db"));}
-        this.marshaller.setProperty(Marshaller.JAXB_ENCODING, "windows-1252");
         this.marshaller.marshal(analytics, new File(uri+File.separator+"db"+File.separator+"mediciones.xml"));
     }
 
@@ -50,6 +50,7 @@ public class JAXBController {
     private Analytics convertXMLToObject(String uri) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(Analytics.class);
         this.unmarshaller = context.createUnmarshaller();
+        this.unmarshaller.setProperty(Marshaller.JAXB_ENCODING, "windows-1252");
         this.analytics = (Analytics) this.unmarshaller.unmarshal(new File(uri));
         return this.analytics;
     }
