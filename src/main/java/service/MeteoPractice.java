@@ -81,7 +81,15 @@ public class MeteoPractice {
                     e.printStackTrace();
                 }
                 inform.getAnalyticsDB().add(currentAnalytics);
-                return inform;
+                try {
+                    JAXBController jaxb = JAXBController.getInstance();
+                    jaxb.setDataBase(inform);
+                    jaxb.printXML();
+                    jaxb.writeXMLFile(directoryURI);
+                    jaxb.getDB(directoryURI+ File.separator + "db" + File.separator+"mediciones.xml").getAnalyticsDB().stream().forEach(System.out::println);
+                } catch (IOException | JAXBException e) {
+                    e.printStackTrace();
+                }
             } else {
                 System.err.println("That city doesn't exists");
                 return null;
