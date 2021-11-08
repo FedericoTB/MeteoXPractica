@@ -1,9 +1,11 @@
 package pojos;
 
+import ioutils.LocalDateAdapter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +24,9 @@ public class MonthData {
     private Magnitude type;
     private Moment maxMeasure;
     private Moment minMeasure;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate startDayMeasure;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate endDayMeasure;
     private double meanValueOfMeasures;
 

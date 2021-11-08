@@ -1,10 +1,12 @@
 package pojos;
 
+import ioutils.LocalDateAdapter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -30,6 +32,7 @@ public class Measure {
      */
     @XmlTransient
     private String magnitude;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate day;
 
     /**
