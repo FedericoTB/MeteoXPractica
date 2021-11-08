@@ -1,12 +1,15 @@
 package ioutils;
 
+
 import pojos.Inform;
 import service.Analytics;
 
+import javax.lang.model.element.Element;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLEventReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,7 +33,7 @@ public class JAXBController {
         return instance;
     }
 
-    private void convertObjectToXML(Inform db) throws JAXBException {
+    public void convertObjectToXML(Inform db) throws JAXBException {
         this.db = db;
         JAXBContext context = JAXBContext.newInstance(Inform.class);
         this.marshaller = context.createMarshaller();
@@ -53,7 +56,7 @@ public class JAXBController {
     public void printXML() throws JAXBException {
         this.marshaller.marshal(db, System.out);
     }
-    private Inform convertXMLToObject(String uri) throws JAXBException {
+    public Inform convertXMLToObject(String uri) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(Inform.class);
         this.unmarshaller = context.createUnmarshaller();
         this.db = (Inform) this.unmarshaller.unmarshal(new File(uri));

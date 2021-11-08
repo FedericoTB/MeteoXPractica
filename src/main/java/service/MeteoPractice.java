@@ -5,6 +5,7 @@ import org.jdom2.JDOMException;
 import pojos.*;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -61,8 +62,8 @@ public class MeteoPractice {
                     }
                 }
                 Inform inform = null;
+                String dbPath = directoryURI+ File.separator + "db" + File.separator+"mediciones.xml";
                 try {
-                    String dbPath = directoryURI+ File.separator + "db" + File.separator+"mediciones.xml";
                     if (Files.exists(Path.of(dbPath))) {
                         inform = JAXBController.getInstance().getDB(dbPath);
                     }else {
@@ -81,13 +82,20 @@ public class MeteoPractice {
                     e.printStackTrace();
                 }
                 inform.getAnalyticsDB().add(currentAnalytics);
+
                 try {
                     JAXBController jaxb = JAXBController.getInstance();
                     jaxb.setDataBase(inform);
-                    jaxb.printXML();
+                    //jaxb.printXML();
                     jaxb.writeXMLFile(directoryURI);
-                    jaxb.getDB(directoryURI+ File.separator + "db" + File.separator+"mediciones.xml").getAnalyticsDB().stream().forEach(System.out::println);
                 } catch (IOException | JAXBException e) {
+                    e.printStackTrace();
+                }
+                JDOM jdom = new JDOM (dbPath);
+                jdom.loadData();
+                try {
+                    MarkDownGenerator.generateMarkdownOfCityMeans(jdom.getAnalyticsOfCity(city), directoryURI + File.separator + "informe-"+city+".md");
+                } catch (XPathExpressionException e) {
                     e.printStackTrace();
                 }
             } else {
