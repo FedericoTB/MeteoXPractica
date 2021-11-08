@@ -39,6 +39,7 @@ public class Measure {
      * List of {@link HourMeasurement} of a day. Should never have more than 24 elements.
      */
     @XmlElementWrapper(name = "day_measurements")
+    @XmlElement(name = "hour_measure")
     private List<HourMeasurement> dayMeasurements;
 
     /**
@@ -46,7 +47,7 @@ public class Measure {
      * @return {@link Moment} modeling a value and the DateTime of its measurement.
      */
     public Moment getMaxValue() {
-        HourMeasurement maxValue = dayMeasurements.stream().filter(s-> s.getValidation() == 'V').max(Comparator.comparing(HourMeasurement::getValue)).get();
+        HourMeasurement maxValue = dayMeasurements.stream().filter(s-> s.getValidation().equals("V")).max(Comparator.comparing(HourMeasurement::getValue)).get();
         //Hour is decremented by 1 to parse between 1 - 24 format and 0 - 23 format
         LocalTime hour = LocalTime.of(maxValue.getHour() - 1, 0);
         return new Moment(LocalDateTime.of(day, hour), maxValue.getValue());
@@ -56,7 +57,7 @@ public class Measure {
      * @return {@link Moment} modeling a value and the DateTime of its measurement.
      */
     public Moment getMinValue() {
-        HourMeasurement minValue = dayMeasurements.stream().filter(s-> s.getValidation() == 'V').min(Comparator.comparing(HourMeasurement::getValue)).get();
+        HourMeasurement minValue = dayMeasurements.stream().filter(s-> s.getValidation().equals("V")).min(Comparator.comparing(HourMeasurement::getValue)).get();
         //Hour is decremented by 1 to parse between 1 - 24 format and 0 - 23 format
         LocalTime hour = LocalTime.of(minValue.getHour() - 1, 0);
         return new Moment(LocalDateTime.of(day, hour), minValue.getValue());
@@ -67,7 +68,7 @@ public class Measure {
      * @return {@link Float} mean value.
      */
     public Float getDayMean () {
-        List<Float> validData = dayMeasurements.stream().filter(v -> v.getValidation() == 'V').map(s -> s.getValue()).collect(Collectors.toList());
+        List<Float> validData = dayMeasurements.stream().filter(v -> v.getValidation().equals("V")).map(s -> s.getValue()).collect(Collectors.toList());
         return validData.stream().reduce(Float::sum).get().floatValue()/validData.size();
     }
 }

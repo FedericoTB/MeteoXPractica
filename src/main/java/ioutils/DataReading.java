@@ -126,12 +126,12 @@ public class DataReading {
                    if(e.getChildText("v0"+i).equals("V")){
                        String value = e.getChildText("h0"+i).replace(",",".");
                        hourM.setValue(Float.valueOf(value));}
-                   hourM.setValidation(e.getChildText("v0"+i).charAt(0));
+                   hourM.setValidation(e.getChildText("v0"+i));
                }else {
                    if(e.getChildText("v"+i).equals("V")){
                        String value = e.getChildText("h"+i).replace(",",".");
                    hourM.setValue(Float.valueOf(value));}
-                   hourM.setValidation(e.getChildText("v"+i).charAt(0));
+                   hourM.setValidation(e.getChildText("v"+i));
                }
                 listHours.add(hourM);
            }

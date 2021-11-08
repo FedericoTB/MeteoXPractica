@@ -2,13 +2,13 @@ package service;
 
 import ioutils.*;
 import org.jdom2.JDOMException;
-import pojos.Magnitude;
-import pojos.Measure;
-import pojos.MonthData;
-import pojos.Station;
+import pojos.*;
 
+import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +27,13 @@ public class MeteoPractice {
     private static final String CONTAMINATION_FILE = PARENT_PATH+"calidad_aire_datos_mes.xml";
     private static final String MAGNITUDES_FILE = PARENT_PATH+"magnitudes_aire.xml";
     private static final String MAGNITUDES_METEO_FILE = PARENT_PATH+"magnitudes_aire_meteo.xml";
-
     /**
      * Generates an Analytics object given a {@link String} city and directory URI.
      * @param city {@link String} name of city
      * @param directoryURI {@link String} URI of the directory where to output images and html
      * @return {@link Analytics} object containing list of temperature and contamination, the station and the HTML
      */
-    public static Analytics generateMeteoAnalysis (String city, String directoryURI) throws IOException, JDOMException {
+    public static Inform runMeteoInform(String city, String directoryURI) throws IOException, JDOMException, URISyntaxException {
         Path directory = DataReading.createDirectory(directoryURI);
         long initialTime = System.currentTimeMillis();
         if (directory != null) {
@@ -61,10 +60,28 @@ public class MeteoPractice {
                         e.printStackTrace();
                     }
                 }
-
-                return buildAnalytics(directory, initialTime, station,
+                Inform inform = null;
+                try {
+                    String dbPath = directoryURI+ File.separator + "db" + File.separator+"mediciones.xml";
+                    if (Files.exists(Path.of(dbPath))) {
+                        inform = JAXBController.getInstance().getDB(dbPath);
+                    }else {
+                        inform = new Inform();
+                    }
+                } catch (JAXBException e) {
+                    e.printStackTrace();
+                }
+                Analytics currentAnalytics = buildAnalytics(directory, initialTime, station,
                         contaminationRunnable.getList(), meteorologyRunnable.getList(),
                         magnitudeRunnable.getList(),  magnitudeMeteoRunnable.getList());
+                currentAnalytics.htmlBuilder();
+                try {
+                    currentAnalytics.generateHtml();
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+                inform.getAnalyticsDB().add(currentAnalytics);
+                return inform;
             } else {
                 System.err.println("That city doesn't exists");
                 return null;

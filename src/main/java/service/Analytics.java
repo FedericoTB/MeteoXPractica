@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -216,5 +217,19 @@ public class Analytics {
     private String getEndingDate(){
        return this.meteorologyData.stream().filter(Objects::nonNull).map(MonthData::getEndDayMeasure).filter(Objects::nonNull)
                .max(LocalDate::compareTo).get().format(DateTimeFormatter.ofPattern("dd/MM/uuuu"));
+    }
+
+    @Override
+    public String toString() {
+        return "Analytics{" +
+                "id=" + id +
+                ", station=" + station +
+                ", contaminationData=" + contaminationData +
+                ", meteorologyData=" + meteorologyData +
+                ", timeOfAnalysis='" + timeOfAnalysis + '\'' +
+                ", initialTime=" + initialTime +
+                ", uri=" + uri +
+                ", contentHtml=" + contentHtml +
+                '}';
     }
 }

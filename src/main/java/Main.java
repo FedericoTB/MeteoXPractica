@@ -1,31 +1,29 @@
-import ioutils.CSVReader;
 import ioutils.JAXBController;
-import ioutils.JDOM;
 import org.jdom2.JDOMException;
-import service.Analytics;
+import pojos.Inform;
 import service.MeteoPractice;
 
 import javax.xml.bind.JAXBException;
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class Main {
     public static void main (String[] args) throws IOException {
-        Analytics analysis = null;
+        Inform inform = null;
         try {
-            analysis = MeteoPractice.generateMeteoAnalysis(args[0], args[1]);
-        } catch (JDOMException | IOException e) {
+            inform = MeteoPractice.runMeteoInform(args[0], args[1]);
+        } catch (JDOMException | IOException | URISyntaxException e) {
             e.printStackTrace();
         }
-        if (analysis != null) {
-            analysis.htmlBuilder();
+        if (inform != null) {
             try {
-                analysis.generateHtml();
                 JAXBController jaxb = JAXBController.getInstance();
-                jaxb.setAnalytics(analysis);
+                jaxb.setDataBase(inform);
                 jaxb.printXML();
                 jaxb.writeXMLFile(args[1]);
-            } catch (IOException | URISyntaxException | JAXBException e) {
+                jaxb.getDB(args[1]+ File.separator + "db" + File.separator+"mediciones.xml").getAnalyticsDB().stream().forEach(System.out::println);
+            } catch (IOException | JAXBException e) {
                 e.printStackTrace();
             }
         }
