@@ -12,10 +12,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-/**
- * Class that parses csv to xml
- * @author sps169, FedericoTB
- */
 public class CSVReader extends Thread {
 	private final String OUTPUT_URI;
 	private final String INPUT_URI;

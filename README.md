@@ -13,9 +13,9 @@ y de contaminacion por estacion dada por argumento y de los datos obtenidos gene
 en el directorio pasado por argumento.
 
 ## Repositorio Original
-<a href="https://github.com/FedericoTB/MeteoXPractica" target="_blank">Repositorio Original</a>
+https://github.com/FedericoTB/MeteoXPractica
 ## Video
-https://drive.google.com/file/d/1cVnSg8IjkgQDh3mnXgFyDfE1jSBoL8ml/view?usp=sharing 
+https://drive.google.com/file/d/1geGTniQP9iTYQ8KHmlISQrR3rZxxD0ne/view?usp=sharing
 
 ## Autores:
 -Sergio Pérez (https://github.com/sps169)
