@@ -15,6 +15,7 @@ public class MarkDownGenerator {
         for (int i = 0; i < means.size(); i++) {
             buffer.append(means.get(i).toString());
         }
+        System.out.println(buffer);
         if (!Files.exists(Path.of(uri))) {
             Files.createFile(Path.of(uri));
         }

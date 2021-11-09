@@ -2,22 +2,18 @@ package ioutils;
 
 
 import pojos.Inform;
-import service.Analytics;
-
-import javax.lang.model.element.Element;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.stream.XMLEventReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * class that works with an XSD and XML files to access data
+ */
 public class JAXBController {
     private static JAXBController instance;
     private Marshaller marshaller;
@@ -33,6 +29,11 @@ public class JAXBController {
         return instance;
     }
 
+    /**
+     * creates marshaller to turn object to xml
+     * @param db inform to parse
+     * @throws JAXBException if jaxb fails to create marshaller
+     */
     public void convertObjectToXML(Inform db) throws JAXBException {
         this.db = db;
         JAXBContext context = JAXBContext.newInstance(Inform.class);
@@ -41,10 +42,21 @@ public class JAXBController {
         this.marshaller.setProperty(Marshaller.JAXB_ENCODING, "windows-1252");
     }
 
+    /**
+     * sets inform as database
+     * @param db inform object used
+     * @throws JAXBException
+     */
     public void setDataBase(Inform db) throws JAXBException {
         convertObjectToXML(db);
     }
 
+    /**
+     * outputs xml file
+     * @param uri path of xml
+     * @throws JAXBException if jaxb fails to marshall
+     * @throws IOException if directory creation fails
+     */
     public void writeXMLFile(String uri) throws JAXBException, IOException {
         if(!Files.exists(Path.of(uri + File.separator + "db"))){
             Files.createDirectory(Path.of(uri+File.separator+"db"));
@@ -53,9 +65,20 @@ public class JAXBController {
 
     }
 
+    /**
+     * outputs an objects as xml in console
+     * @throws JAXBException if marshalling fails
+     */
     public void printXML() throws JAXBException {
         this.marshaller.marshal(db, System.out);
     }
+
+    /**
+     * reads an xml and parses it to inform object
+     * @param uri xml file path
+     * @return inform object
+     * @throws JAXBException if unmarshalling fails
+     */
     public Inform convertXMLToObject(String uri) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(Inform.class);
         this.unmarshaller = context.createUnmarshaller();
@@ -63,6 +86,12 @@ public class JAXBController {
         return this.db;
     }
 
+    /**
+     * gets db from xml uri
+     * @param uri xml file
+     * @return Inform object
+     * @throws JAXBException if unmarshalling fails
+     */
     public Inform getDB(String uri) throws JAXBException {
         return convertXMLToObject(uri);
     }

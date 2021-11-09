@@ -2,11 +2,9 @@ package ioutils;
 
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
-import org.w3c.dom.NodeList;
 import pojos.*;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -143,6 +141,14 @@ public class DataReading {
                   ),listHours);
        }).collect(Collectors.toList());
     }
+
+    /**
+     * reads magnitudes from xml document and returns them as list
+     * @param file xml file
+     * @return list of magnitudes
+     * @throws IOException if reading fails
+     * @throws JDOMException if there's xml parsing problems
+     */
     public static List<Magnitude> getMagnitudes(String file) throws IOException, JDOMException {
         JDOM jdom = getFile(file);
         List<Element> magnitudesXml = jdom.getDocument().getRootElement().getChildren("magnitud");

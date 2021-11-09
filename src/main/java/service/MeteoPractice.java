@@ -94,7 +94,8 @@ public class MeteoPractice {
                 JDOM jdom = new JDOM (dbPath);
                 jdom.loadData();
                 try {
-                    MarkDownGenerator.generateMarkdownOfCityMeans(jdom.getAnalyticsOfCity(city), directoryURI + File.separator + "informe-"+city+".md");
+                    List<CityMeans> means = jdom.getAnalyticsOfCity(city);
+                    MarkDownGenerator.generateMarkdownOfCityMeans(means, directoryURI + File.separator + "informe-"+city+".md");
                 } catch (XPathExpressionException e) {
                     e.printStackTrace();
                 }
