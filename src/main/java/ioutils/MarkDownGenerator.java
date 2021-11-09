@@ -9,7 +9,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+/**
+ * class that deals with markdown files generation
+ * @author sps169, FedericoTB
+ */
 public class MarkDownGenerator {
+    /**
+     * receives a list of citymeans and an uri outputs its data into a file
+     * @param means list of city means containing data
+     * @param uri uri to output
+     * @throws IOException if writing fails
+     */
     public static void generateMarkdownOfCityMeans(List<CityMeans> means, String uri) throws IOException {
         StringBuilder buffer = new StringBuilder();
         for (int i = 0; i < means.size(); i++) {

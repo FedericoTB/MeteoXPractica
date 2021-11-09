@@ -13,6 +13,7 @@ import java.nio.file.Path;
 
 /**
  * class that works with an XSD and XML files to access data
+ * @author sps169, FedericoTB
  */
 public class JAXBController {
     private static JAXBController instance;

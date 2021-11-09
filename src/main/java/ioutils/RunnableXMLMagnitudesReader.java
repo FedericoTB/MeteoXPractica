@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * runnable reader for magnitudes xml
+ * @author sps169, FedericoTB
+ */
 public class RunnableXMLMagnitudesReader extends RunnableXMLReader{
     private List<Magnitude> list;
 
@@ -23,9 +27,7 @@ public class RunnableXMLMagnitudesReader extends RunnableXMLReader{
         this.list = new ArrayList<Magnitude>();
         try {
             this.list =  DataReading.getMagnitudes(super.getFile());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JDOMException e) {
+        } catch (IOException | JDOMException e) {
             e.printStackTrace();
         }
     }

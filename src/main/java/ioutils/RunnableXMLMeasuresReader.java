@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 /**
- * Runnable class that reads and parses a magnitude document with a given charset and stores it in a list of Magnitudes
+ * Runnable class that reads and parses a measures document with a given charset and stores it in a list of measures
  * @author sps169, FedericoTB
  */
 public class RunnableXMLMeasuresReader extends RunnableXMLReader{

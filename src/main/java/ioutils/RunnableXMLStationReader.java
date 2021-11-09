@@ -5,12 +5,16 @@ import pojos.Station;
 
 import java.io.IOException;
 
+/**
+ * Runnable class that reads and parses a station document with a given charset and returns it
+ * @author sps169, FedericoTB
+ */
 public class RunnableXMLStationReader extends RunnableXMLReader{
     private Station station;
     private final String city;
 
     /**
-     * Creates a RunnableXMLMeasuresReader
+     * Creates a RunnableXMLStationReader
      * @param file {@link String} file URI of readable data
      */
     public RunnableXMLStationReader(String city,String file) {

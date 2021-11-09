@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 /**
  * JDOM utils for reading and accessing XML files node by node
+ * @author sps169, FedericoTB
  */
 public class JDOM{
     private Document document;
