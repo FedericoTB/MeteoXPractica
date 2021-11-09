@@ -1,14 +1,15 @@
 package service;
 
-import ioutils.DataReading;
-import ioutils.RunnableCSVReader;
-import ioutils.RunnableStreamReader;
-import pojos.Magnitude;
-import pojos.Measure;
-import pojos.MonthData;
-import pojos.Station;
+import ioutils.*;
+import org.jdom2.JDOMException;
+import pojos.*;
+
+import javax.xml.bind.JAXBException;
+import javax.xml.xpath.XPathExpressionException;
+import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,30 +22,34 @@ import java.util.stream.Collectors;
  * @author sps169, FedericoTB
  */
 public class MeteoPractice {
-    private static final String STATIONS_FILE = "calidad_aire_estaciones.csv";
-    private static final String METEOROLOGY_FILE = "calidad_aire_datos_meteo_mes.csv";
-    private static final String CONTAMINATION_FILE = "calidad_aire_datos_mes.csv";
-    private static final String MAGNITUDES_FILE = "magnitudes_aire.csv";
-    private static final String MAGNITUDES_METEO_FILE = "magnitudes_aire_meteo.csv";
-
+    private static final String PARENT_PATH = "data"+ File.separator;
+    private static final String STATIONS_FILE = PARENT_PATH+"calidad_aire_estaciones.xml";
+    private static final String METEOROLOGY_FILE = PARENT_PATH+"calidad_aire_datos_meteo_mes.xml";
+    private static final String CONTAMINATION_FILE = PARENT_PATH+"calidad_aire_datos_mes.xml";
+    private static final String MAGNITUDES_FILE = PARENT_PATH+"magnitudes_aire.xml";
+    private static final String MAGNITUDES_METEO_FILE = PARENT_PATH+"magnitudes_aire_meteo.xml";
     /**
-     * Generates an Analytics object given a {@link String} city and directory URI.
+     * Generates an Inform object given a {@link String} city and directory URI.
+     * If inform already exists, it updates it with a new inform. Also generates a Markdown output
      * @param city {@link String} name of city
      * @param directoryURI {@link String} URI of the directory where to output images and html
-     * @return {@link Analytics} object containing list of temperature and contamination, the station and the HTML
+     * @return {@link Inform} object containing list of temperature and contamination, the station and the HTML
      */
-    public static Analytics generateMeteoAnalysis (String city, String directoryURI) {
+    public static Inform runMeteoInform(String city, String directoryURI) throws IOException, JDOMException, URISyntaxException {
         Path directory = DataReading.createDirectory(directoryURI);
         long initialTime = System.currentTimeMillis();
         if (directory != null) {
-            Station station = DataReading.getStation(city, STATIONS_FILE, Charset.forName("windows-1252")).orElse(null);
+            CSVReader.generateXMLFilesFromCSV();
+            Station station = DataReading.getStation(city, STATIONS_FILE).orElse(null);
             if (station != null) {
                 //thread approach to reading csv and filtering streams
-                ThreadPoolExecutor threads = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
-                RunnableStreamReader contaminationRunnable = new RunnableStreamReader(station,CONTAMINATION_FILE, Charset.forName("windows-1252"));
-                RunnableStreamReader meteorologyRunnable = new RunnableStreamReader(station,METEOROLOGY_FILE, Charset.forName("windows-1252"));
-                RunnableCSVReader magnitudeRunnable = new RunnableCSVReader(MAGNITUDES_FILE, Charset.forName("windows-1252"));
-                RunnableCSVReader magnitudeMeteoRunnable = new RunnableCSVReader(MAGNITUDES_METEO_FILE, Charset.forName("windows-1252"));
+                ThreadPoolExecutor threads = (ThreadPoolExecutor) Executors.newFixedThreadPool(5);
+                RunnableXMLStationReader stationRunnable = new RunnableXMLStationReader(city,STATIONS_FILE);
+                RunnableXMLMeasuresReader contaminationRunnable = new RunnableXMLMeasuresReader(CONTAMINATION_FILE,station);
+                RunnableXMLMeasuresReader meteorologyRunnable = new RunnableXMLMeasuresReader(METEOROLOGY_FILE,station);
+                RunnableXMLMagnitudesReader magnitudeRunnable = new RunnableXMLMagnitudesReader(MAGNITUDES_FILE);
+                RunnableXMLMagnitudesReader magnitudeMeteoRunnable = new RunnableXMLMagnitudesReader(MAGNITUDES_METEO_FILE);
+                threads.execute(stationRunnable);
                 threads.execute(contaminationRunnable);
                 threads.execute(meteorologyRunnable);
                 threads.execute(magnitudeRunnable);
@@ -57,10 +62,44 @@ public class MeteoPractice {
                         e.printStackTrace();
                     }
                 }
-
-                return buildAnalytics(directory, initialTime, station,
+                Inform inform = null;
+                String dbPath = directoryURI+ File.separator + "db" + File.separator+"mediciones.xml";
+                try {
+                    if (Files.exists(Path.of(dbPath))) {
+                        inform = JAXBController.getInstance().getDB(dbPath);
+                    }else {
+                        inform = new Inform();
+                    }
+                } catch (JAXBException e) {
+                    e.printStackTrace();
+                }
+                Analytics currentAnalytics = buildAnalytics(directory, initialTime, station,
                         contaminationRunnable.getList(), meteorologyRunnable.getList(),
                         magnitudeRunnable.getList(),  magnitudeMeteoRunnable.getList());
+                currentAnalytics.htmlBuilder();
+                try {
+                    currentAnalytics.generateHtml();
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+                inform.getAnalyticsDB().add(currentAnalytics);
+
+                try {
+                    JAXBController jaxb = JAXBController.getInstance();
+                    jaxb.setDataBase(inform);
+                    //jaxb.printXML();
+                    jaxb.writeXMLFile(directoryURI);
+                } catch (IOException | JAXBException e) {
+                    e.printStackTrace();
+                }
+                JDOM jdom = new JDOM (dbPath);
+                jdom.loadData();
+                try {
+                    List<CityMeans> means = jdom.getAnalyticsOfCity(city);
+                    MarkDownGenerator.generateMarkdownOfCityMeans(means, directoryURI + File.separator + "informe-"+city+".md");
+                } catch (XPathExpressionException e) {
+                    e.printStackTrace();
+                }
             } else {
                 System.err.println("That city doesn't exists");
                 return null;

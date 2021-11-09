@@ -2,19 +2,29 @@ package pojos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.xml.bind.annotation.*;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @AllArgsConstructor
-
+@NoArgsConstructor
 /**
  * Class that models a measurement.
  * @author sps169, FedericoTB
  */
+@XmlRootElement(name ="hour_measurement")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class HourMeasurement {
 
     /**
      * int value that stores the hour of measurement
      */
+    @XmlAttribute(name = "hour")
     private int hour;
 
     /**
@@ -25,5 +35,6 @@ public class HourMeasurement {
     /**
      * validation of the measurement. It can be {"V", "N", "T"}.
      */
-    private char validation;
+    @XmlAttribute(name = "validation")
+    private String validation;
 }

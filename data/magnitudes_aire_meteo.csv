@@ -1,3 +1,4 @@
+codigo_magnitud;descripcion_magnitud;codigo_tecnica_medida;descripcion_tecnica_medida;unidad;descripcion_unidad;
 81;Velocidad del viento;89;;m/s;metros por segundo;
 83;Temperatura;89;;ºc;grados centígrados;
 86;Humedad relativa;89;;%;porcentaje;

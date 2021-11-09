@@ -1,8 +1,12 @@
 package pojos;
 
+import ioutils.LocalDateAdapter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,23 +16,30 @@ import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
-
+@NoArgsConstructor
 /**
  * Class that models a day worth of data.
  * @author sps169, FedericoTB
  */
+@XmlRootElement(name ="measure")
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Measure {
 
     /**
      * Stores only the String value of a {@link Magnitude}
      * which means magnitude ==  Magnitude.getCodMagnitude().
      */
+    @XmlTransient
     private String magnitude;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate day;
 
     /**
      * List of {@link HourMeasurement} of a day. Should never have more than 24 elements.
      */
+    @XmlElementWrapper(name = "day_measurements")
+    @XmlElement(name = "hour_measure")
     private List<HourMeasurement> dayMeasurements;
 
     /**
@@ -36,7 +47,7 @@ public class Measure {
      * @return {@link Moment} modeling a value and the DateTime of its measurement.
      */
     public Moment getMaxValue() {
-        HourMeasurement maxValue = dayMeasurements.stream().filter(s-> s.getValidation() == 'V').max(Comparator.comparing(HourMeasurement::getValue)).get();
+        HourMeasurement maxValue = dayMeasurements.stream().filter(s-> s.getValidation().equals("V")).max(Comparator.comparing(HourMeasurement::getValue)).get();
         //Hour is decremented by 1 to parse between 1 - 24 format and 0 - 23 format
         LocalTime hour = LocalTime.of(maxValue.getHour() - 1, 0);
         return new Moment(LocalDateTime.of(day, hour), maxValue.getValue());
@@ -46,7 +57,7 @@ public class Measure {
      * @return {@link Moment} modeling a value and the DateTime of its measurement.
      */
     public Moment getMinValue() {
-        HourMeasurement minValue = dayMeasurements.stream().filter(s-> s.getValidation() == 'V').min(Comparator.comparing(HourMeasurement::getValue)).get();
+        HourMeasurement minValue = dayMeasurements.stream().filter(s-> s.getValidation().equals("V")).min(Comparator.comparing(HourMeasurement::getValue)).get();
         //Hour is decremented by 1 to parse between 1 - 24 format and 0 - 23 format
         LocalTime hour = LocalTime.of(minValue.getHour() - 1, 0);
         return new Moment(LocalDateTime.of(day, hour), minValue.getValue());
@@ -57,7 +68,7 @@ public class Measure {
      * @return {@link Float} mean value.
      */
     public Float getDayMean () {
-        List<Float> validData = dayMeasurements.stream().filter(v -> v.getValidation() == 'V').map(s -> s.getValue()).collect(Collectors.toList());
+        List<Float> validData = dayMeasurements.stream().filter(v -> v.getValidation().equals("V")).map(s -> s.getValue()).collect(Collectors.toList());
         return validData.stream().reduce(Float::sum).get().floatValue()/validData.size();
     }
 }

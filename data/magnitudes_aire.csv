@@ -1,3 +1,4 @@
+codigo_magnitud;descripcion_magnitud;codigo_tecnica_medida;descripcion_tecnica_medida;unidad;descripcion_unidad;
 1;Dióxido de azufre;38;Fluorescencia ultravioleta;µg/m³;microgramos por metro cúbico;
 6;Monóxido de carbono;48;Espectrometría infrarroja no dispersiva;mg/m³;miligramos por metro cúbico;
 7;Monóxido de nitrógeno;8;Quimioluminiscencia;µg/m³;microgramos por metro cúbico;

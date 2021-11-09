@@ -1,22 +1,32 @@
 package pojos;
 
+import ioutils.LocalDateAdapter;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
 /**
  * Class that models the data of a whole month.
  * @author sps169, FedericoTB
  */
+@XmlRootElement(name = "monthdata")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MonthData {
+    @XmlElementWrapper(name ="measures")
     private List<Measure> measures;
     private Magnitude type;
     private Moment maxMeasure;
     private Moment minMeasure;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate startDayMeasure;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate endDayMeasure;
     private double meanValueOfMeasures;
 
