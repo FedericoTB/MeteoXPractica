@@ -29,10 +29,11 @@ public class MeteoPractice {
     private static final String MAGNITUDES_FILE = PARENT_PATH+"magnitudes_aire.xml";
     private static final String MAGNITUDES_METEO_FILE = PARENT_PATH+"magnitudes_aire_meteo.xml";
     /**
-     * Generates an Analytics object given a {@link String} city and directory URI.
+     * Generates an Inform object given a {@link String} city and directory URI.
+     * If inform already exists, it updates it with a new inform. Also generates a Markdown output
      * @param city {@link String} name of city
      * @param directoryURI {@link String} URI of the directory where to output images and html
-     * @return {@link Analytics} object containing list of temperature and contamination, the station and the HTML
+     * @return {@link Inform} object containing list of temperature and contamination, the station and the HTML
      */
     public static Inform runMeteoInform(String city, String directoryURI) throws IOException, JDOMException, URISyntaxException {
         Path directory = DataReading.createDirectory(directoryURI);
