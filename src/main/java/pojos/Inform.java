@@ -13,6 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @XmlRootElement(name = "database")
+/**
+ * Class that models a List of Analytics measures of a city.
+ * @author sps169, FedericoTB
+ */
 public class Inform {
     @XmlElementWrapper(name = "informs")
     private List<Analytics> inform = new ArrayList<>();

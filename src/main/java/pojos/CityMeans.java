@@ -9,6 +9,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * Class that models means of measures of all measures from the XML database for city.
+ * @author sps169, FedericoTB
+ */
 public class CityMeans {
     private String city;
     private List<DataMean> contaminationMeans;
